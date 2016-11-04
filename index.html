@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Signature Generator</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"
+          type="text/css"/>
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://macexperience.com"><img width="145px"
+                                                                         src="https://signature-gen-app.s3.amazonaws.com/img/MacExpLogotransparent.png"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> Home <span
+                        class="sr-only">(current)</span></a></li>
+                <li><a data-toggle="modal" data-target="#sigHelpModal" href=""><span
+                        class="glyphicon glyphicon-question-sign"></span> Help</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+
+    <div id="alertArea"></div>
+
+    <div class="settings-area">
+
+        <h2>Signature Generator</h2>
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Your Name and Job Title</strong>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="input-name">Name
+                        <small>(required)</small>
+                    </label>
+                    <input type="text" id="input-name" class="form-control"><br>
+                    <label for="input-title">Job Title
+                        <small>(required)</small>
+                    </label>
+                    <input type="text" id="input-title" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Your Certifications</strong><br>
+                <small>(i.e. ACMT - Apple Certified Mac Technician)</small>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="input-cert1-abbr">Abbreviation 1</label>
+                    <input type="text" size="4" id="input-cert1-abbr" class="form-control"><br>
+                    <label for="input-cert1-name">Name 1</label>
+                    <input type="text" id="input-cert1-name" class="form-control">
+                    <hr>
+                    <label for="input-cert2-abbr">Abbreviation 2</label>
+                    <input type="text" size="4" id="input-cert2-abbr" class="form-control"><br>
+                    <label for="input-cert2-name">Name 2</label>
+                    <input type="text" id="input-cert2-name" class="form-control">
+                    <hr>
+                    <label for="input-cert3-abbr">Abbreviation 3</label>
+                    <input type="text" size="4" id="input-cert3-abbr" class="form-control"><br>
+                    <label for="input-cert3-name">Name 3</label>
+                    <input type="text" id="input-cert3-name" class="form-control">
+                    <hr>
+                    <label for="input-cert4-abbr">Abbreviation 1</label>
+                    <input type="text" size="4" id="input-cert4-abbr" class="form-control"><br>
+                    <label for="input-cert4-name">Name 4</label>
+                    <input type="text" id="input-cert4-name" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Your Phone Numbers</strong><br>
+                <small>(i.e. 317.123.1234 - Office)</small>
+            </div>
+            <div class="panel-body">
+                <label for="input-phone1">Phone 1
+                    <small>(required)</small>
+                </label>
+                <input type="text" id="input-phone1" class="form-control">
+                <label for="input-phone1-type">Type 1
+                    <small>(required)</small>
+                </label>
+                <input type="text" id="input-phone1-type" class="form-control">
+                <hr>
+                <label for="input-phone2">Phone 2</label>
+                <input type="text" id="input-phone2" class="form-control">
+                <label for="input-phone2-type">Type 2</label>
+                <input type="text" id="input-phone2-type" class="form-control">
+                <hr>
+                <label for="input-phone3">Phone 3</label>
+                <input type="text" id="input-phone3" class="form-control">
+                <label for="input-phone3-type">Type 3</label>
+                <input type="text" id="input-phone3-type" class="form-control">
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Your Email Address</strong>
+            </div>
+            <div class="panel-body">
+                <label for="input-email">Email
+                    <small>(required)</small>
+                </label>
+                <input type="text" id="input-email" class="form-control">
+
+            </div>
+        </div>
+        <!-- Button Trigger Signature Modal -->
+        <button type="button" id="generate-sig-btn" class="btn btn-success btn-lg pull-right" data-toggle="modal"
+                data-target="#sigModal">
+            Generate Signature
+        </button>
+        <br><br><br><br>
+    </div>
+</div>
+
+
+<!-- START Signature Modal -->
+<div class="modal fade" id="sigModal" tabindex="-1" role="dialog" aria-labelledby="sigModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="sigModalLabel">Your signature has been generated!</h4>
+                <span>Copy the signature below.</span>
+            </div>
+            <div class="modal-body">
+
+                <!-- START Signature Area -->
+                <p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: 400; color: #6A6A6A;">
+
+                    <strong><span id="output-name">YOUR NAME HERE</span> | <span
+                            id="output-title">TITLE HERE</span></strong>
+
+                    <span id="cert1"><br><span id="output-cert1-abbr">CERT1</span> <i><span id="output-cert1-name">Certification Type Here</span></i></span>
+                    <span id="cert2"><br><span id="output-cert2-abbr">CERT2</span> <i><span id="output-cert2-name">Certification Type Here</span></i></span>
+                    <span id="cert3"><br><span id="output-cert3-abbr">CERT3</span> <i><span id="output-cert3-name">Certification Type Here</span></i></span>
+                    <span id="cert4"><br><span id="output-cert4-abbr">CERT4</span> <i><span id="output-cert4-name">Certification Type Here</span></i></span>
+                    <br>__________________________________<br>
+
+                        <span id="phone1"><span id="output-phone1-num">317.123.4567</span> — <span
+                                id="output-phone1-type">Office</span><br></span>
+                        <span id="phone2"><span id="output-phone2-num">317.123.4567</span> — <span
+                                id="output-phone2-type">Cell</span><br></span>
+                        <span id="phone3"><span id="output-phone3-num">317.123.4567</span> — <span
+                                id="output-phone3-type">Fax</span><br></span>
+
+                        <span id="email"><a id="output-email-link" href="mailto:your-email@macexperience.com"><span
+                                id="output-email-name">your-email@macexperience.com</span></a><br/></span>
+                    <a href="http://macexperience.com">www.macexperience.com</a><br><br>
+                    <a href="http://macexperience.com">
+                        <img width="250px" height="43px"
+                             src="https://s3.amazonaws.com/macexp-assets/email/MacExp-Logo.png">
+                    </a>
+                </p>
+                <!-- END Signature Area -->
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger pull-left" data-toggle="modal" data-target="#sigHelpModal">
+                    <span class="glyphicon glyphicon-question-sign"></span> Help
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Signature Modal -->
+
+<!-- START Signature Help Modal -->
+<div class="modal fade" id="sigHelpModal" tabindex="-1" role="dialog" aria-labelledby="sigHelpModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="sigHelpModalLabel">How to paste your signature into Mail.app and Kerio</h4>
+                <span>Follow the directions below.</span>
+            </div>
+            <div class="modal-body">
+
+                <h5><strong>Step 1:</strong> Copy your generated signature to your clipboard.</h5>
+                <img width="100%"
+                     src="https://s3.amazonaws.com/signature-gen-app/img/copy-signature-screenshot.png"><br>
+
+                <h4><strong>Mail.app Instructions</strong></h4>
+                <h5><strong>Step 2:</strong> Open Mail.app, navigate to Mail > Preferences... in the menubar. Then click
+                    on "Signatures"
+                    in the top bar. Paste your signature into a new signature.<br><br>
+                    <i><strong>Please note:</strong> It's normal for the logo image to show up as a question mark
+                        initially.</i></h5>
+                <img width="100%"
+                     src="https://s3.amazonaws.com/signature-gen-app/img/paste-into-mail-app-screenshot.png"><br>
+
+                <h4><strong>Kerio Instructions</strong></h4>
+                <h5><strong>Step 2:</strong> Open <a href="https://kerio.macexp.com">kerio.macexp.com</a>. After logging
+                    in, go to your
+                    user name and click "Settings"</h5>
+                <img width="100%" src="https://s3.amazonaws.com/signature-gen-app/img/kerio-go-to-settings.png"><br>
+
+                <h5><strong>Step 3:</strong> Paste your signature into the box.
+                    <small>(remember to click save!)</small>
+                </h5>
+                <img width="100%" src="https://s3.amazonaws.com/signature-gen-app/img/kerio-paste-sig-click-save.png">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Signature Help Modal -->
+
+<footer>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://s3.amazonaws.com/signature-gen-app/js/bowser.min.js"></script>
+    <script src="https://s3.amazonaws.com/signature-gen-app/js/signature-gen.js"></script>
+    <script>
+        signatureGenApp.browserDetection();
+    </script>
+</footer>
+</body>
+</html>
