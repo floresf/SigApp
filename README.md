@@ -7,4 +7,4 @@
 
 
 ### App Output 
-![alt text]( SigApp/img/copy-signature-screenshot.png "Output")
+ 
